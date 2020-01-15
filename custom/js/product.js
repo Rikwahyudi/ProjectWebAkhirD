@@ -5,7 +5,7 @@ $(document).ready(function() {
 	$('#navProduct').addClass('active');
 	// manage product data table
 	manageProductTable = $('#manageProductTable').DataTable({
-		'ajax': 'php_action/fetchProduct.php',
+		'ajax': 'proses/fetchProduct.php',
 		'order': []
 	});
 
@@ -59,7 +59,7 @@ $(document).ready(function() {
 			}	// /else
 
 			if(productName == "") {
-				$("#productName").after('<p class="text-danger">Product Name field is required</p>');
+				$("#productName").after('<p class="text-danger">Product Perlu Di Isi</p>');
 				$('#productName').closest('.form-group').addClass('has-error');
 			}	else {
 				// remov error text field
@@ -89,7 +89,7 @@ $(document).ready(function() {
 			}	// /else
 
 			if(brandName == "") {
-				$("#brandName").after('<p class="text-danger">Brand Name field is required</p>');
+				$("#brandName").after('<p class="text-danger">Brand Perlu Di Isi</p>');
 				$('#brandName').closest('.form-group').addClass('has-error');
 			}	else {
 				// remov error text field
@@ -99,7 +99,7 @@ $(document).ready(function() {
 			}	// /else
 
 			if(categoryName == "") {
-				$("#categoryName").after('<p class="text-danger">Category Name field is required</p>');
+				$("#categoryName").after('<p class="text-danger">Category Perlu Di Isi</p>');
 				$('#categoryName').closest('.form-group').addClass('has-error');
 			}	else {
 				// remov error text field
@@ -194,7 +194,7 @@ function editProduct(productId = null) {
 		$('.div-result').addClass('div-hide');
 
 		$.ajax({
-			url: 'php_action/fetchSelectedProduct.php',
+			url: 'proses/fetchSelectedProduct.php',
 			type: 'post',
 			data: {productId: productId},
 			dataType: 'json',
@@ -258,7 +258,7 @@ function editProduct(productId = null) {
 								
 
 					if(productName == "") {
-						$("#editProductName").after('<p class="text-danger">Product Name field is required</p>');
+						$("#editProductName").after('<p class="text-danger">Product Perlu Di Isi</p>');
 						$('#editProductName').closest('.form-group').addClass('has-error');
 					}	else {
 						// remov error text field
@@ -288,7 +288,7 @@ function editProduct(productId = null) {
 					}	// /else
 
 					if(brandName == "") {
-						$("#editBrandName").after('<p class="text-danger">Brand Name field is required</p>');
+						$("#editBrandName").after('<p class="text-danger">Brand Perlu Di Isi</p>');
 						$('#editBrandName').closest('.form-group').addClass('has-error');
 					}	else {
 						// remov error text field
@@ -298,7 +298,7 @@ function editProduct(productId = null) {
 					}	// /else
 
 					if(categoryName == "") {
-						$("#editCategoryName").after('<p class="text-danger">Category Name field is required</p>');
+						$("#editCategoryName").after('<p class="text-danger">Category Perlu Di Isi</p>');
 						$('#editCategoryName').closest('.form-group').addClass('has-error');
 					}	else {
 						// remov error text field
@@ -427,7 +427,7 @@ function editProduct(productId = null) {
 									$(".fileinput-remove-button").click();
 
 									$.ajax({
-										url: 'php_action/fetchProductImageUrl.php?i='+productId,
+										url: 'proses/fetchProductImageUrl.php?i='+productId,
 										type: 'post',
 										success:function(response) {
 										$("#getProductImage").attr('src', response);		
@@ -465,7 +465,7 @@ function removeProduct(productId = null) {
 			// loading remove button
 			$("#removeProductBtn").button('loading');
 			$.ajax({
-				url: 'php_action/removeProduct.php',
+				url: 'proses/removeProduct.php',
 				type: 'post',
 				data: {productId: productId},
 				dataType: 'json',

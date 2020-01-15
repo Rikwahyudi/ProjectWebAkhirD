@@ -39,7 +39,7 @@ $(document).ready(function() {
 			} // /else
 
 			if(clientName == "") {
-				$("#clientName").after('<p class="text-danger"> The Client Name field is required </p>');
+				$("#clientName").after('<p class="text-danger"> The Client Perlu Di Isi </p>');
 				$('#clientName').closest('.form-group').addClass('has-error');
 			} else {
 				$('#clientName').closest('.form-group').addClass('has-success');
@@ -87,7 +87,7 @@ $(document).ready(function() {
 			for (var x = 0; x < productName.length; x++) {       			
 				var productNameId = productName[x].id;	    	
 		    if(productName[x].value == ''){	    		    	
-		    	$("#"+productNameId+"").after('<p class="text-danger"> Product Name Field is required!! </p>');
+		    	$("#"+productNameId+"").after('<p class="text-danger"> Product Perlu Di Isi!! </p>');
 		    	$("#"+productNameId+"").closest('.form-group').addClass('has-error');	    		    	    	
 	      } else {      	
 		    	$("#"+productNameId+"").closest('.form-group').addClass('has-success');	    		    		    	
@@ -107,7 +107,7 @@ $(document).ready(function() {
 	   	for (var x = 0; x < quantity.length; x++) {       
 	 			var quantityId = quantity[x].id;
 		    if(quantity[x].value == ''){	    	
-		    	$("#"+quantityId+"").after('<p class="text-danger"> Product Name Field is required!! </p>');
+		    	$("#"+quantityId+"").after('<p class="text-danger"> Product Perlu Di Isi!! </p>');
 		    	$("#"+quantityId+"").closest('.form-group').addClass('has-error');	    		    		    	
 	      } else {      	
 		    	$("#"+quantityId+"").closest('.form-group').addClass('has-success');	    		    		    		    	
@@ -176,7 +176,7 @@ $(document).ready(function() {
 		$('#topNavManageOrder').addClass('active');
 
 		manageOrderTable = $("#manageOrderTable").DataTable({
-			'ajax': 'php_action/fetchOrder.php',
+			'ajax': 'proses/fetchOrder.php',
 			'order': []
 		});		
 					
@@ -208,7 +208,7 @@ $(document).ready(function() {
 			} // /else
 
 			if(clientName == "") {
-				$("#clientName").after('<p class="text-danger"> The Client Name field is required </p>');
+				$("#clientName").after('<p class="text-danger"> The Client Perlu Di Isi </p>');
 				$('#clientName').closest('.form-group').addClass('has-error');
 			} else {
 				$('#clientName').closest('.form-group').addClass('has-success');
@@ -256,7 +256,7 @@ $(document).ready(function() {
 			for (var x = 0; x < productName.length; x++) {       			
 				var productNameId = productName[x].id;	    	
 		    if(productName[x].value == ''){	    		    	
-		    	$("#"+productNameId+"").after('<p class="text-danger"> Product Name Field is required!! </p>');
+		    	$("#"+productNameId+"").after('<p class="text-danger"> Product Perlu Di Isi!! </p>');
 		    	$("#"+productNameId+"").closest('.form-group').addClass('has-error');	    		    	    	
 	      } else {      	
 		    	$("#"+productNameId+"").closest('.form-group').addClass('has-success');	    		    		    	
@@ -276,7 +276,7 @@ $(document).ready(function() {
 	   	for (var x = 0; x < quantity.length; x++) {       
 	 			var quantityId = quantity[x].id;
 		    if(quantity[x].value == ''){	    	
-		    	$("#"+quantityId+"").after('<p class="text-danger"> Product Name Field is required!! </p>');
+		    	$("#"+quantityId+"").after('<p class="text-danger"> Product Perlu Di Isi!! </p>');
 		    	$("#"+quantityId+"").closest('.form-group').addClass('has-error');	    		    		    	
 	      } else {      	
 		    	$("#"+quantityId+"").closest('.form-group').addClass('has-success');	    		    		    		    	
@@ -346,7 +346,7 @@ function printOrder(orderId = null) {
 	if(orderId) {		
 			
 		$.ajax({
-			url: 'php_action/printOrder.php',
+			url: 'proses/printOrder.php',
 			type: 'post',
 			data: {orderId: orderId},
 			dataType: 'text',
@@ -391,7 +391,7 @@ function addRow() {
 	}
 
 	$.ajax({
-		url: 'php_action/fetchProductData.php',
+		url: 'proses/fetchProductData.php',
 		type: 'post',
 		dataType: 'json',
 		success:function(response) {
@@ -437,7 +437,7 @@ function addRow() {
 		} // /success
 	});	// get the product data
 
-} // /add row
+} // /Tambahkan Pesanan
 
 function removeProductRow(row = null) {
 	if(row) {
@@ -478,7 +478,7 @@ function getProductData(row = null) {
 
 		} else {
 			$.ajax({
-				url: 'php_action/fetchSelectedProduct.php',
+				url: 'proses/fetchSelectedProduct.php',
 				type: 'post',
 				data: {productId : productId},
 				dataType: 'json',
@@ -649,7 +649,7 @@ function removeOrder(orderId = null) {
 			$("#removeOrderBtn").button('loading');
 
 			$.ajax({
-				url: 'php_action/removeOrder.php',
+				url: 'proses/removeOrder.php',
 				type: 'post',
 				data: {orderId : orderId},
 				dataType: 'json',
@@ -708,7 +708,7 @@ function paymentOrder(orderId = null) {
 		$("#orderDate").datepicker();
 
 		$.ajax({
-			url: 'php_action/fetchOrderData.php',
+			url: 'proses/fetchOrderData.php',
 			type: 'post',
 			data: {orderId: orderId},
 			dataType: 'json',
@@ -754,7 +754,7 @@ function paymentOrder(orderId = null) {
 					if(payAmount && paymentType && paymentStatus) {
 						$("#updatePaymentOrderBtn").button('loading');
 						$.ajax({
-							url: 'php_action/editPayment.php',
+							url: 'proses/editPayment.php',
 							type: 'post',
 							data: {
 								orderId: orderId,

@@ -1,8 +1,9 @@
 <?php
- require_once 'includes/header.php'; 
+require_once 'proses/koneksi.php'; 
+require_once 'includes/header.php'; 
 
 if($_GET['o'] == 'add') { 
-// Tambah Pesanan
+// add order
 	echo "<div class='div-request div-hide'>add</div>";
 } else if($_GET['o'] == 'manord') { 
 	echo "<div class='div-request div-hide'>manord</div>";
@@ -15,12 +16,12 @@ if($_GET['o'] == 'add') {
 
 <ol class="breadcrumb">
   <li><a href="dashboard.php">Home</a></li>
-  <li>Pesanan</li>
+  <li>Order</li>
   <li class="active">
   	<?php if($_GET['o'] == 'add') { ?>
   		Tambah Pesanan
 		<?php } else if($_GET['o'] == 'manord') { ?>
-			Manajemen Pesanan
+			Manage Order
 		<?php } // /else manage order ?>
   </li>
 </ol>
@@ -29,11 +30,11 @@ if($_GET['o'] == 'add') {
 <h4>
 	<i class='glyphicon glyphicon-circle-arrow-right'></i>
 	<?php if($_GET['o'] == 'add') {
-		echo "Tambah Pesanan";
+		echo "Add Order";
 	} else if($_GET['o'] == 'manord') { 
-		echo "Manajemen";
+		echo "Manage Order";
 	} else if($_GET['o'] == 'editOrd') { 
-		echo "Edit Pesanan";
+		echo "Edit Order";
 	}
 	?>	
 </h4>
@@ -46,24 +47,24 @@ if($_GET['o'] == 'add') {
 		<?php if($_GET['o'] == 'add') { ?>
   		<i class="glyphicon glyphicon-plus-sign"></i>	Tambah Pesanan
 		<?php } else if($_GET['o'] == 'manord') { ?>
-			<i class="glyphicon glyphicon-edit"></i> Manage Order
+			<i class="glyphicon glyphicon-edit"></i> Manajemen Pesanan
 		<?php } else if($_GET['o'] == 'editOrd') { ?>
-			<i class="glyphicon glyphicon-edit"></i> Edit Order
+			<i class="glyphicon glyphicon-edit"></i> Edit Pesanan
 		<?php } ?>
 
 	</div> <!--/panel-->	
 	<div class="panel-body">
 			
 		<?php if($_GET['o'] == 'add') { 
-			// Tambah Pesanan
+			// add order
 			?>			
 
 			<div class="success-messages"></div> <!--/success-messages-->
 
-  		<form class="form-horizontal" method="POST" action="php_action/createOrder.php" id="createOrderForm">
+  		<form class="form-horizontal" method="POST" action="proses/createOrder.php" id="createOrderForm">
 
 			  <div class="form-group">
-			    <label for="orderDate" class="col-sm-2 control-label">Tanggal Pesan</label>
+			    <label for="orderDate" class="col-sm-2 control-label">Tanggal Pemesanan</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="orderDate" name="orderDate" autocomplete="off" />
 			    </div>
@@ -127,7 +128,6 @@ if($_GET['o'] == 'add') {
 			  					<input type="hidden" name="totalValue[]" id="totalValue<?php echo $x; ?>" autocomplete="off" class="form-control" />			  					
 			  				</td>
 			  				<td>
-
 			  					<button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(<?php echo $x; ?>)"><i class="glyphicon glyphicon-trash"></i></button>
 			  				</td>
 			  			</tr>
@@ -140,7 +140,7 @@ if($_GET['o'] == 'add') {
 
 			  <div class="col-md-6">
 			  	<div class="form-group">
-				    <label for="subTotal" class="col-sm-3 control-label">Harga</label>
+				    <label for="subTotal" class="col-sm-3 control-label">Sub Pembayaran</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="subTotal" name="subTotal" disabled="true" />
 				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" />
@@ -154,20 +154,20 @@ if($_GET['o'] == 'add') {
 				    </div>
 				  </div> <!--/form-group-->			  
 				  <div class="form-group">
-				    <label for="totalAmount" class="col-sm-3 control-label">Total Harga</label>
+				    <label for="totalAmount" class="col-sm-3 control-label">Total Pembayaran</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="totalAmount" name="totalAmount" disabled="true"/>
 				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" />
 				    </div>
 				  </div> <!--/form-group-->			  
 				  <div class="form-group">
-				    <label for="discount" class="col-sm-3 control-label">Diskon</label>
+				    <label for="discount" class="col-sm-3 control-label">Discount</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" />
 				    </div>
 				  </div> <!--/form-group-->	
 				  <div class="form-group">
-				    <label for="grandTotal" class="col-sm-3 control-label">Total Bayar</label>
+				    <label for="grandTotal" class="col-sm-3 control-label">Total Keseluruhan</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" />
 				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" />
@@ -177,13 +177,13 @@ if($_GET['o'] == 'add') {
 
 			  <div class="col-md-6">
 			  	<div class="form-group">
-				    <label for="paid" class="col-sm-3 control-label">Yang Harus Di Bayar</label>
+				    <label for="paid" class="col-sm-3 control-label">Pembayaran</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" />
 				    </div>
 				  </div> <!--/form-group-->			  
 				  <div class="form-group">
-				    <label for="due" class="col-sm-3 control-label">Due Amount</label>
+				    <label for="due" class="col-sm-3 control-label">Kembalian</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="due" name="due" disabled="true" />
 				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" />
@@ -195,7 +195,7 @@ if($_GET['o'] == 'add') {
 				      <select class="form-control" name="paymentType" id="paymentType">
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1">Cek</option>
-				      	<option value="2">Cash</option>
+				      	<option value="2">Tunai</option>
 				      	<option value="3">Kartu Kredit</option>
 				      </select>
 				    </div>
@@ -205,9 +205,9 @@ if($_GET['o'] == 'add') {
 				    <div class="col-sm-9">
 				      <select class="form-control" name="paymentStatus" id="paymentStatus">
 				      	<option value="">~~SELECT~~</option>
-				      	<option value="1">Full</option>
-				      	<option value="2">Kredit</option>
-				      	<option value="3">No Payment</option>
+				      	<option value="1">Bayar Penuh</option>
+				      	<option value="2">Bayar Kredit</option>
+				      	<option value="3">Belum Bayar</option>
 				      </select>
 				    </div>
 				  </div> <!--/form-group-->							  
@@ -216,9 +216,9 @@ if($_GET['o'] == 'add') {
 
 			  <div class="form-group submitButtonFooter">
 			    <div class="col-sm-offset-2 col-sm-10">
-			    <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Add Row </button>
+			    <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Tambahkan Pesanan </button>
 
-			      <button type="submit" id="createOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+			      <button type="submit" id="createOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Simpan</button>
 
 			      <button type="reset" class="btn btn-default" onclick="resetOrderForm()"><i class="glyphicon glyphicon-erase"></i> Reset</button>
 			    </div>
@@ -234,11 +234,11 @@ if($_GET['o'] == 'add') {
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>Tanggal Pesan</th>
-						<th>Nama Klien</th>
-						<th>Kontak</th>
-						<th>Total Barang Pesanan</th>
-						<th>Status Pembayaran</th>
+						<th>Order Date</th>
+						<th>Client Name</th>
+						<th>Contact</th>
+						<th>Total Order Item</th>
+						<th>Payment Status</th>
 						<th>Option</th>
 					</tr>
 				</thead>
@@ -252,19 +252,19 @@ if($_GET['o'] == 'add') {
 			
 			<div class="success-messages"></div> <!--/success-messages-->
 
-  		<form class="form-horizontal" method="POST" action="php_action/editOrder.php" id="editOrderForm">
+  		<form class="form-horizontal" method="POST" action="proses/editOrder.php" id="editOrderForm">
 
   			<?php $orderId = $_GET['i'];
 
   			$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.sub_total, orders.vat, orders.total_amount, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status FROM orders 	
 					WHERE orders.order_id = {$orderId}";
 
-				$result = $connect->query($sql);
-				$data = $result->fetch_row();				
+				$hasil = $connect->query($sql);
+				$data = $hasil->fetch_row();				
   			?>
 
 			  <div class="form-group">
-			    <label for="orderDate" class="col-sm-2 control-label">Tanggal Pesan</label>
+			    <label for="orderDate" class="col-sm-2 control-label">Tanggal Pemesanan</label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" id="orderDate" name="orderDate" autocomplete="off" value="<?php echo $data[1] ?>" />
 			    </div>
@@ -358,7 +358,7 @@ if($_GET['o'] == 'add') {
 
 			  <div class="col-md-6">
 			  	<div class="form-group">
-				    <label for="subTotal" class="col-sm-3 control-label">Harga</label>
+				    <label for="subTotal" class="col-sm-3 control-label">Sub Pembayaran</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="subTotal" name="subTotal" disabled="true" value="<?php echo $data[4] ?>" />
 				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" value="<?php echo $data[4] ?>" />
@@ -372,20 +372,20 @@ if($_GET['o'] == 'add') {
 				    </div>
 				  </div> <!--/form-group-->			  
 				  <div class="form-group">
-				    <label for="totalAmount" class="col-sm-3 control-label">Total Harga</label>
+				    <label for="totalAmount" class="col-sm-3 control-label">Total Amount</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="totalAmount" name="totalAmount" disabled="true" value="<?php echo $data[6] ?>" />
 				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" value="<?php echo $data[6] ?>"  />
 				    </div>
 				  </div> <!--/form-group-->			  
 				  <div class="form-group">
-				    <label for="discount" class="col-sm-3 control-label">Diskon</label>
+				    <label for="discount" class="col-sm-3 control-label">Discount</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="<?php echo $data[7] ?>" />
 				    </div>
 				  </div> <!--/form-group-->	
 				  <div class="form-group">
-				    <label for="grandTotal" class="col-sm-3 control-label">Total Bayar</label>
+				    <label for="grandTotal" class="col-sm-3 control-label">Total Keseluruhan</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" value="<?php echo $data[8] ?>"  />
 				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" value="<?php echo $data[8] ?>"  />
@@ -395,7 +395,7 @@ if($_GET['o'] == 'add') {
 
 			  <div class="col-md-6">
 			  	<div class="form-group">
-				    <label for="paid" class="col-sm-3 control-label">Yang Di Bayar</label>
+				    <label for="paid" class="col-sm-3 control-label">Pembayaran</label>
 				    <div class="col-sm-9">
 				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="<?php echo $data[9] ?>"  />
 				    </div>
@@ -417,7 +417,7 @@ if($_GET['o'] == 'add') {
 				      	} ?> >Cek</option>
 				      	<option value="2" <?php if($data[11] == 2) {
 				      		echo "selected";
-				      	} ?>  >Cash</option>
+				      	} ?>  >Tunai</option>
 				      	<option value="3" <?php if($data[11] == 3) {
 				      		echo "selected";
 				      	} ?> >Kartu Kredit</option>
@@ -431,13 +431,13 @@ if($_GET['o'] == 'add') {
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1" <?php if($data[12] == 1) {
 				      		echo "selected";
-				      	} ?>  >Full</option>
+				      	} ?>  >Bayar Penuh</option>
 				      	<option value="2" <?php if($data[12] == 2) {
 				      		echo "selected";
-				      	} ?> >Kredit</option>
+				      	} ?> >Bayar Kredit</option>
 				      	<option value="3" <?php if($data[10] == 3) {
 				      		echo "selected";
-				      	} ?> >No Payment</option>
+				      	} ?> >Belum Bayar</option>
 				      </select>
 				    </div>
 				  </div> <!--/form-group-->							  
@@ -446,11 +446,11 @@ if($_GET['o'] == 'add') {
 
 			  <div class="form-group editButtonFooter">
 			    <div class="col-sm-offset-2 col-sm-10">
-			    <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Add Row </button>
+			    <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Tambahkan Pesanan </button>
 
 			    <input type="hidden" name="orderId" id="orderId" value="<?php echo $_GET['i']; ?>" />
 
-			    <button type="submit" id="editOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+			    <button type="submit" id="editOrderBtn" data-loading-text="Loading..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Simpan</button>
 			      
 			    </div>
 			  </div>
@@ -470,7 +470,7 @@ if($_GET['o'] == 'add') {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><i class="glyphicon glyphicon-edit"></i> Edit Payment</h4>
+        <h4 class="modal-title"><i class="glyphicon glyphicon-edit"></i> Edit Pembayaran</h4>
       </div>      
 
       <div class="modal-body form-horizontal" style="max-height:500px; overflow:auto;" >
@@ -479,13 +479,13 @@ if($_GET['o'] == 'add') {
 
       	     				 				 
 			  <div class="form-group">
-			    <label for="due" class="col-sm-3 control-label">Kembalian</label>
+			    <label for="due" class="col-sm-3 control-label">Pembayaran</label>
 			    <div class="col-sm-9">
 			      <input type="text" class="form-control" id="due" name="due" disabled="true" />					
 			    </div>
 			  </div> <!--/form-group-->		
 			  <div class="form-group">
-			    <label for="payAmount" class="col-sm-3 control-label">Yang di Bayar</label>
+			    <label for="payAmount" class="col-sm-3 control-label">Bayar</label>
 			    <div class="col-sm-9">
 			      <input type="text" class="form-control" id="payAmount" name="payAmount"/>					      
 			    </div>
@@ -496,19 +496,19 @@ if($_GET['o'] == 'add') {
 			      <select class="form-control" name="paymentType" id="paymentType" >
 			      	<option value="">~~SELECT~~</option>
 			      	<option value="1">Cek</option>
-			      	<option value="2">Cash</option>
+			      	<option value="2">Tunai</option>
 			      	<option value="3">Kartu Kredit</option>
 			      </select>
 			    </div>
 			  </div> <!--/form-group-->							  
 			  <div class="form-group">
-			    <label for="clientContact" class="col-sm-3 control-label">Tipe Pembayaran</label>
+			    <label for="clientContact" class="col-sm-3 control-label">Status Pembayaran</label>
 			    <div class="col-sm-9">
 			      <select class="form-control" name="paymentStatus" id="paymentStatus">
-				  <option value="">~~SELECT~~</option>
-			      	<option value="1">Cek</option>
-			      	<option value="2">Cash</option>
-			      	<option value="3">Kartu Kredit</option>
+			      	<option value="">~~SELECT~~</option>
+			      	<option value="1">Bayar Penuh</option>
+			      	<option value="2">Bayar Kredit</option>
+			      	<option value="3">Belum Bayar</option>
 			      </select>
 			    </div>
 			  </div> <!--/form-group-->							  				  
@@ -516,7 +516,7 @@ if($_GET['o'] == 'add') {
       </div> <!--/modal-body-->
       <div class="modal-footer">
       	<button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="updatePaymentOrderBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>	
+        <button type="button" class="btn btn-primary" id="updatePaymentOrderBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Simpan</button>	
       </div>           
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -535,11 +535,11 @@ if($_GET['o'] == 'add') {
 
       	<div class="removeOrderMessages"></div>
 
-        <p>Yakin Ingin di hapus ?</p>
+        <p>Yakin Mau di Hapus?</p>
       </div>
       <div class="modal-footer removeProductFooter">
         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeOrderBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+        <button type="button" class="btn btn-primary" id="removeOrderBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Simpan</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -548,8 +548,4 @@ if($_GET['o'] == 'add') {
 
 
 <script src="custom/js/order.js"></script>
-
 <?php require_once 'includes/footer.php'; ?>
-
-
-	

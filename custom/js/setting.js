@@ -11,7 +11,7 @@ $(document).ready(function() {
 		var username = $("#username").val();
 
 		if(username == "") {
-			$("#username").after('<p class="text-danger">Username field is required</p>');
+			$("#username").after('<p class="text-danger">UserPerlu Di Isi</p>');
 			$("#username").closest('.form-group').addClass('has-error');
 		} else {
 

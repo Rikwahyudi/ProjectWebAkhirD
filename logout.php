@@ -1,13 +1,13 @@
 <?php 
 
-require_once 'php_action/core.php';
+require_once 'proses/core.php';
 
-// remove all session variables
+// hapus all session variables
 session_unset(); 
 
 // destroy the session 
 session_destroy(); 
 
-header('location: http://localhost/stock/index.php');
+header('location: http://localhost/projekAkhir/ProjectWebAkhirD/index.php');
 
 ?>
