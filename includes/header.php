@@ -1,8 +1,10 @@
+<?php require_once 'proses/core.php'; ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 
-	<title>Inventory Barang</title>
+	<title>Inventori Barang</title>
 
 	<!-- bootstrap -->
 	<link rel="stylesheet" href="assests/bootstrap/css/bootstrap.min.css">
@@ -51,7 +53,7 @@
 
       <ul class="nav navbar-nav navbar-right">        
 
-      	<li id="navDashboard"><a href="home.php"><i class="glyphicon glyphicon-list-alt"></i>  Home</a></li>        
+      	<li id="navDashboard"><a href="index.php"><i class="glyphicon glyphicon-list-alt"></i>  Home</a></li>        
         
         <li id="navBrand"><a href="brand.php"><i class="glyphicon glyphicon-btc"></i>  Merek</a></li>        
 
@@ -73,7 +75,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
           <ul class="dropdown-menu">            
             <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Setting</a></li>            
-            <li id="topNavLogout"><a href="#"> <i class="glyphicon glyphicon-log-out"></i> Logout</a></li>            
+            <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Logout</a></li>            
           </ul>
         </li>        
                

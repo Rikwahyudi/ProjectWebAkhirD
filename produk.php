@@ -1,3 +1,4 @@
+<?php require_once 'proses/koneksi.php' ?>
 <?php require_once 'includes/header.php'; ?>
 
 <div class="row">
@@ -42,15 +43,15 @@
 </div> <!-- /row -->
 
 
-<!-- tambah product -->
-<div class="modal fade" >
+<!-- add product -->
+<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-        <!--tamba-->
-    	<form class="form-horizontal" id="submitProductForm" action="php_action/createProduct.php" method="POST" enctype="multipart/form-data">
+
+    	<form class="form-horizontal" id="submitProductForm" action="proses/createProduct.php" method="POST" enctype="multipart/form-data">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title"><i class="fa fa-plus"></i> Tambah Produk</h4>
+	        <h4 class="modal-title"><i class="fa fa-plus"></i> Add Product</h4>
 	      </div>
 
 	      <div class="modal-body" style="max-height:450px; overflow:auto;">
@@ -58,23 +59,23 @@
 	      	<div id="add-product-messages"></div>
 
 	      	<div class="form-group">
-	        	<label for="productImage" class="col-sm-3 control-label">Gambar : </label>
+	        	<label for="productImage" class="col-sm-3 control-label">Product Image: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 					    <!-- the avatar markup -->
 							<div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>							
 					    <div class="kv-avatar center-block">					        
-					        <input type="file" class="form-control" id="productImage" placeholder="Product Name" name="productImage" class="file-loading" style="width:auto;"/>
+					        <input type="file" class="form-control" id="productImage" placeholder="Nama Produk" name="productImage" class="file-loading" style="width:auto;"/>
 					    </div>
 				      
 				    </div>
 	        </div> <!-- /form-group-->	     	           	       
 
 	        <div class="form-group">
-	        	<label for="productName" class="col-sm-3 control-label">Product Name: </label>
+	        	<label for="productName" class="col-sm-3 control-label">Nama Produk: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="productName" placeholder="Product Name" name="productName" autocomplete="off">
+				      <input type="text" class="form-control" id="productName" placeholder="Nama Produk" name="productName" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	    
 
@@ -87,7 +88,7 @@
 	        </div> <!-- /form-group-->	        	 
 
 	        <div class="form-group">
-	        	<label for="rate" class="col-sm-3 control-label">Rate: </label>
+	        	<label for="rate" class="col-sm-3 control-label">Harga: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="rate" placeholder="Rate" name="rate" autocomplete="off">
@@ -102,9 +103,9 @@
 				      	<option value="">~~SELECT~~</option>
 				      	<?php 
 				      	$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1 AND brand_active = 1";
-								$result = $connect->query($sql);
+								$hasil = $connect->query($sql);
 
-								while($row = $result->fetch_array()) {
+								while($row = $hasil->fetch_array()) {
 									echo "<option value='".$row[0]."'>".$row[1]."</option>";
 								} // while
 								
@@ -114,16 +115,16 @@
 	        </div> <!-- /form-group-->	
 
 	        <div class="form-group">
-	        	<label for="categoryName" class="col-sm-3 control-label">Category Name: </label>
+	        	<label for="categoryName" class="col-sm-3 control-label">Nama Kategori: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <select type="text" class="form-control" id="categoryName" placeholder="Product Name" name="categoryName" >
+				      <select type="text" class="form-control" id="categoryName" placeholder="Nama Produk" name="categoryName" >
 				      	<option value="">~~SELECT~~</option>
 				      	<?php 
 				      	$sql = "SELECT categories_id, categories_name, categories_active, categories_status FROM categories WHERE categories_status = 1 AND categories_active = 1";
-								$result = $connect->query($sql);
+								$hasil = $connect->query($sql);
 
-								while($row = $result->fetch_array()) {
+								while($row = $hasil->fetch_array()) {
 									echo "<option value='".$row[0]."'>".$row[1]."</option>";
 								} // while
 								
@@ -138,8 +139,8 @@
 				    <div class="col-sm-8">
 				      <select class="form-control" id="productStatus" name="productStatus">
 				      	<option value="">~~SELECT~~</option>
-				      	<option value="1">Available</option>
-				      	<option value="2">Not Available</option>
+				      	<option value="1">Tersedia</option>
+				      	<option value="2">Tidak Tersedia</option>
 				      </select>
 				    </div>
 	        </div> <!-- /form-group-->	         	        
@@ -148,7 +149,7 @@
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
 	        
-	        <button type="submit" class="btn btn-primary" id="createProductBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+	        <button type="submit" class="btn btn-primary" id="createProductBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Simpan</button>
 	      </div> <!-- /modal-footer -->	      
      	</form> <!-- /.form -->	     
     </div> <!-- /modal-content -->    
@@ -186,7 +187,7 @@
 
 				  	
 				    <div role="tabpanel" class="tab-pane active" id="photo">
-				    	<form action="php_action/editProductImage.php" method="POST" id="updateProductImageForm" class="form-horizontal" enctype="multipart/form-data">
+				    	<form action="proses/editProductImage.php" method="POST" id="updateProductImageForm" class="form-horizontal" enctype="multipart/form-data">
 
 				    	<br />
 				    	<div id="edit-productPhoto-messages"></div>
@@ -206,7 +207,7 @@
 							    <!-- the avatar markup -->
 									<div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>							
 							    <div class="kv-avatar center-block">					        
-							        <input type="file" class="form-control" id="editProductImage" placeholder="Product Name" name="editProductImage" class="file-loading" style="width:auto;"/>
+							        <input type="file" class="form-control" id="editProductImage" placeholder="Nama Produk" name="editProductImage" class="file-loading" style="width:auto;"/>
 							    </div>
 						      
 						    </div>
@@ -215,7 +216,7 @@
 			        <div class="modal-footer editProductPhotoFooter">
 				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
 				        
-				        <!-- <button type="submit" class="btn btn-success" id="editProductImageBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button> -->
+				        <!-- <button type="submit" class="btn btn-success" id="editProductImageBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Simpan</button> -->
 				      </div>
 				      <!-- /modal-footer -->
 				      </form>
@@ -223,16 +224,16 @@
 				    </div>
 				    <!-- product image -->
 				    <div role="tabpanel" class="tab-pane" id="productInfo">
-				    	<form class="form-horizontal" id="editProductForm" action="php_action/editProduct.php" method="POST">				    
+				    	<form class="form-horizontal" id="editProductForm" action="proses/editProduct.php" method="POST">				    
 				    	<br />
 
 				    	<div id="edit-product-messages"></div>
 
 				    	<div class="form-group">
-			        	<label for="editProductName" class="col-sm-3 control-label">Product Name: </label>
+			        	<label for="editProductName" class="col-sm-3 control-label">Nama Produk: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="editProductName" placeholder="Product Name" name="editProductName" autocomplete="off">
+						      <input type="text" class="form-control" id="editProductName" placeholder="Nama Produk" name="editProductName" autocomplete="off">
 						    </div>
 			        </div> <!-- /form-group-->	    
 
@@ -245,7 +246,7 @@
 			        </div> <!-- /form-group-->	        	 
 
 			        <div class="form-group">
-			        	<label for="editRate" class="col-sm-3 control-label">Rate: </label>
+			        	<label for="editRate" class="col-sm-3 control-label">Harga: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
 						      <input type="text" class="form-control" id="editRate" placeholder="Rate" name="editRate" autocomplete="off">
@@ -260,9 +261,9 @@
 						      	<option value="">~~SELECT~~</option>
 						      	<?php 
 						      	$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1 AND brand_active = 1";
-										$result = $connect->query($sql);
+										$hasil = $connect->query($sql);
 
-										while($row = $result->fetch_array()) {
+										while($row = $hasil->fetch_array()) {
 											echo "<option value='".$row[0]."'>".$row[1]."</option>";
 										} // while
 										
@@ -272,16 +273,16 @@
 			        </div> <!-- /form-group-->	
 
 			        <div class="form-group">
-			        	<label for="editCategoryName" class="col-sm-3 control-label">Category Name: </label>
+			        	<label for="editCategoryName" class="col-sm-3 control-label">Nama Kategori: </label>
 			        	<label class="col-sm-1 control-label">: </label>
 						    <div class="col-sm-8">
 						      <select type="text" class="form-control" id="editCategoryName" name="editCategoryName" >
 						      	<option value="">~~SELECT~~</option>
 						      	<?php 
 						      	$sql = "SELECT categories_id, categories_name, categories_active, categories_status FROM categories WHERE categories_status = 1 AND categories_active = 1";
-										$result = $connect->query($sql);
+										$hasil = $connect->query($sql);
 
-										while($row = $result->fetch_array()) {
+										while($row = $hasil->fetch_array()) {
 											echo "<option value='".$row[0]."'>".$row[1]."</option>";
 										} // while
 										
@@ -296,8 +297,8 @@
 						    <div class="col-sm-8">
 						      <select class="form-control" id="editProductStatus" name="editProductStatus">
 						      	<option value="">~~SELECT~~</option>
-						      	<option value="1">Available</option>
-						      	<option value="2">Not Available</option>
+						      	<option value="1">Tersedia</option>
+						      	<option value="2">Tidak Tersedia</option>
 						      </select>
 						    </div>
 			        </div> <!-- /form-group-->	         	        
@@ -305,7 +306,7 @@
 			        <div class="modal-footer editProductFooter">
 				        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
 				        
-				        <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+				        <button type="submit" class="btn btn-success" id="editProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Simpan</button>
 				      </div> <!-- /modal-footer -->				     
 			        </form> <!-- /.form -->				     	
 				    </div>    
@@ -330,17 +331,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Remove Product</h4>
+        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Hapus Produk</h4>
       </div>
       <div class="modal-body">
 
       	<div class="removeProductMessages"></div>
 
-        <p>Do you really want to remove ?</p>
+        <p>Yakin Mau di Hapus?</p>
       </div>
       <div class="modal-footer removeProductFooter">
         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+        <button type="button" class="btn btn-primary" id="removeProductBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Simpan</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

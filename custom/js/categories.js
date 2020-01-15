@@ -5,7 +5,7 @@ $(document).ready(function() {
 	$('#navCategories').addClass('active');	
 
 	manageCategoriesTable = $('#manageCategoriesTable').DataTable({
-		'ajax' : 'php_action/fetchCategories.php',
+		'ajax' : 'proses/fetchCategories.php',
 		'order': []
 	}); // manage categories Data Table
 
@@ -113,7 +113,7 @@ function editCategories(categoriesId = null) {
 		$(".editCategoriesFooter").addClass('div-hide');		
 
 		$.ajax({
-			url: 'php_action/fetchSelectedCategories.php',
+			url: 'proses/fetchSelectedCategories.php',
 			type: 'post',
 			data: {categoriesId: categoriesId},
 			dataType: 'json',
@@ -214,7 +214,7 @@ function editCategories(categoriesId = null) {
 function removeCategories(categoriesId = null) {
 		
 	$.ajax({
-		url: 'php_action/fetchSelectedCategories.php',
+		url: 'proses/fetchSelectedCategories.php',
 		type: 'post',
 		data: {categoriesId: categoriesId},
 		dataType: 'json',
@@ -226,7 +226,7 @@ function removeCategories(categoriesId = null) {
 				$("#removeCategoriesBtn").button('loading');
 
 				$.ajax({
-					url: 'php_action/removeCategories.php',
+					url: 'proses/removeCategories.php',
 					type: 'post',
 					data: {categoriesId: categoriesId},
 					dataType: 'json',

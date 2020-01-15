@@ -4,22 +4,22 @@
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<i class="glyphicon glyphicon-check"></i>	Laporan
+				<i class="glyphicon glyphicon-check"></i>	Laporan Pesanan
 			</div>
 			<!-- /panel-heading -->
 			<div class="panel-body">
 				
-				<form class="form-horizontal">
+				<form class="form-horizontal" action="proses/getOrderReport.php" method="post" id="getOrderReportForm">
 				  <div class="form-group">
-				    <label for="startDate" class="col-sm-2 control-label">Awal</label>
+				    <label for="startDate" class="col-sm-2 control-label">Tanggal Awal</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="startDate" name="startDate" placeholder="Tanggal Awal" />
+				      <input type="text" class="form-control" id="startDate" name="startDate" placeholder="Awal" />
 				    </div>
 				  </div>
 				  <div class="form-group">
-				    <label for="endDate" class="col-sm-2 control-label">Akhir</label>
+				    <label for="endDate" class="col-sm-2 control-label">Tanggal Akhir</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="endDate" name="endDate" placeholder="Tanggal Akhir" />
+				      <input type="text" class="form-control" id="endDate" name="endDate" placeholder="Akhir" />
 				    </div>
 				  </div>
 				  <div class="form-group">
@@ -36,5 +36,7 @@
 	<!-- /col-dm-12 -->
 </div>
 <!-- /row -->
+
 <script src="custom/js/report.js"></script>
+
 <?php require_once 'includes/footer.php'; ?>

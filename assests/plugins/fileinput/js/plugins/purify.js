@@ -328,7 +328,7 @@
         if (KEEP_CONTENT) { ALLOWED_TAGS['#text'] = true; }
 
         // Prevent further manipulation of configuration.
-        // Not available in IE8, Safari 5, etc.
+        // Tidak Tersedia in IE8, Safari 5, etc.
         if (Object && 'freeze' in Object) { Object.freeze(cfg); }
 
         CONFIG = cfg;

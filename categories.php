@@ -24,7 +24,7 @@
 				<table class="table" id="manageCategoriesTable">
 					<thead>
 						<tr>							
-							<th>Nama Kategori</th>
+							<th>Categories Name</th>
 							<th>Status</th>
 							<th style="width:15%;">Options</th>
 						</tr>
@@ -65,8 +65,8 @@
 				    <div class="col-sm-7">
 				      <select class="form-control" id="categoriesStatus" name="categoriesStatus">
 				      	<option value="">~~SELECT~~</option>
-				      	<option value="1">Available</option>
-				      	<option value="2">Not Available</option>
+				      	<option value="1">Tersedia</option>
+				      	<option value="2">Tidak Tersedia</option>
 				      </select>
 				    </div>
 	        </div> <!-- /form-group-->	         	        
@@ -117,8 +117,8 @@
 					    <div class="col-sm-7">
 					      <select class="form-control" id="editCategoriesStatus" name="editCategoriesStatus">
 					      	<option value="">~~SELECT~~</option>
-					      	<option value="1">Available</option>
-					      	<option value="2">Not Available</option>
+					      	<option value="1">Tersedia</option>
+					      	<option value="2">Tidak Tersedia</option>
 					      </select>
 					    </div>
 		        </div> <!-- /form-group-->	 
@@ -148,10 +148,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Hapus Brand</h4>
+        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Hapus Kategori</h4>
       </div>
       <div class="modal-body">
-        <p>Yakin Mau Di Hapus ?</p>
+        <p>Yakin Mau di Hapus?</p>
       </div>
       <div class="modal-footer removeCategoriesFooter">
         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>

@@ -6,7 +6,7 @@ $(document).ready(function() {
 	
 	// manage brand table
 	manageBrandTable = $("#manageBrandTable").DataTable({
-		'ajax': 'php_action/fetchBrand.php',
+		'ajax': 'proses/fetchBrand.php',
 		'order': []		
 	});
 
@@ -21,7 +21,7 @@ $(document).ready(function() {
 		var brandStatus = $("#brandStatus").val();
 
 		if(brandName == "") {
-			$("#brandName").after('<p class="text-danger">Brand Name field is required</p>');
+			$("#brandName").after('<p class="text-danger">Brand Perlu Di Isi</p>');
 			$('#brandName').closest('.form-group').addClass('has-error');
 		} else {
 			// remov error text field
@@ -31,7 +31,7 @@ $(document).ready(function() {
 		}
 
 		if(brandStatus == "") {
-			$("#brandStatus").after('<p class="text-danger">Brand Name field is required</p>');
+			$("#brandStatus").after('<p class="text-danger">Brand Perlu Di Isi</p>');
 
 			$('#brandStatus').closest('.form-group').addClass('has-error');
 		} else {
@@ -105,7 +105,7 @@ function editBrands(brandId = null) {
 		$('.editBrandFooter').addClass('div-hide');
 
 		$.ajax({
-			url: 'php_action/fetchSelectedBrand.php',
+			url: 'proses/fetchSelectedBrand.php',
 			type: 'post',
 			data: {brandId : brandId},
 			dataType: 'json',
@@ -136,7 +136,7 @@ function editBrands(brandId = null) {
 					var brandStatus = $('#editBrandStatus').val();
 
 					if(brandName == "") {
-						$("#editBrandName").after('<p class="text-danger">Brand Name field is required</p>');
+						$("#editBrandName").after('<p class="text-danger">Brand Perlu Di Isi</p>');
 						$('#editBrandName').closest('.form-group').addClass('has-error');
 					} else {
 						// remov error text field
@@ -146,7 +146,7 @@ function editBrands(brandId = null) {
 					}
 
 					if(brandStatus == "") {
-						$("#editBrandStatus").after('<p class="text-danger">Brand Name field is required</p>');
+						$("#editBrandStatus").after('<p class="text-danger">Brand Perlu Di Isi</p>');
 
 						$('#editBrandStatus').closest('.form-group').addClass('has-error');
 					} else {
@@ -212,7 +212,7 @@ function removeBrands(brandId = null) {
 	if(brandId) {
 		$('#removeBrandId').remove();
 		$.ajax({
-			url: 'php_action/fetchSelectedBrand.php',
+			url: 'proses/fetchSelectedBrand.php',
 			type: 'post',
 			data: {brandId : brandId},
 			dataType: 'json',
@@ -225,7 +225,7 @@ function removeBrands(brandId = null) {
 					$("#removeBrandBtn").button('loading');
 
 					$.ajax({
-						url: 'php_action/removeBrand.php',
+						url: 'proses/hapusBrand.php',
 						type: 'post',
 						data: {brandId : brandId},
 						dataType: 'json',

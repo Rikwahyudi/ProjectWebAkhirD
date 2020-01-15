@@ -4,7 +4,7 @@
 $user_id = $_SESSION['userId'];
 $sql = "SELECT * FROM users WHERE user_id = {$user_id}";
 $query = $connect->query($sql);
-$result = $query->fetch_assoc();
+$hasil = $query->fetch_assoc();
 
 $connect->close();
 ?>
@@ -23,7 +23,7 @@ $connect->close();
 
 			<div class="panel-body">
 
-				<form action="php_action/changeUsername.php" method="post" class="form-horizontal" id="changeUsernameForm">
+				<form action="proses/changeUsername.php" method="post" class="form-horizontal" id="changeUsernameForm">
 					<fieldset>
 						<legend>Change Username</legend>
 
@@ -32,20 +32,20 @@ $connect->close();
 						<div class="form-group">
 					    <label for="username" class="col-sm-2 control-label">Username</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="username" name="username" placeholder="Usename" value="<?php echo $result['username']; ?>"/>
+					      <input type="text" class="form-control" id="username" name="username" placeholder="Usename" value="<?php echo $hasil['username']; ?>"/>
 					    </div>
 					  </div>
 
 					  <div class="form-group">
 					    <div class="col-sm-offset-2 col-sm-10">
-					    	<input type="hidden" name="user_id" id="user_id" value="<?php echo $result['user_id'] ?>" /> 
-					      <button type="submit" class="btn btn-success" data-loading-text="Loading..." id="changeUsernameBtn"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes </button>
+					    	<input type="hidden" name="user_id" id="user_id" value="<?php echo $hasil['user_id'] ?>" /> 
+					      <button type="submit" class="btn btn-success" data-loading-text="Loading..." id="changeUsernameBtn"> <i class="glyphicon glyphicon-ok-sign"></i> Simpan </button>
 					    </div>
 					  </div>
 					</fieldset>
 				</form>
 
-				<form action="php_action/changePassword.php" method="post" class="form-horizontal" id="changePasswordForm">
+				<form action="proses/changePassword.php" method="post" class="form-horizontal" id="changePasswordForm">
 					<fieldset>
 						<legend>Change Password</legend>
 
@@ -74,8 +74,8 @@ $connect->close();
 
 					  <div class="form-group">
 					    <div class="col-sm-offset-2 col-sm-10">
-					    	<input type="hidden" name="user_id" id="user_id" value="<?php echo $result['user_id'] ?>" /> 
-					      <button type="submit" class="btn btn-primary"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes </button>
+					    	<input type="hidden" name="user_id" id="user_id" value="<?php echo $hasil['user_id'] ?>" /> 
+					      <button type="submit" class="btn btn-primary"> <i class="glyphicon glyphicon-ok-sign"></i> Simpan </button>
 					      
 					    </div>
 					  </div>
